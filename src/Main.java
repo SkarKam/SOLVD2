@@ -1,4 +1,5 @@
 import models.*;
+import util.CenterEmployeeUtil;
 
 import java.awt.*;
 import java.time.LocalDate;
@@ -78,10 +79,23 @@ public class Main {
 
 /*        System.out.println(CenterEmployeeUtil.getFullName(centerEmployee));*/
 
-        System.out.print("Welcome to shop center system.");
+        janitor1.setSalary(3000);
+        manager1.setSalary(5000);
+        securityWorker1.setRate(35);
+        securityWorker1.setHoursWorked(168);
+
+        System.out.println(CenterEmployeeUtil.getFullName(janitor1));
+        System.out.println(CenterEmployeeUtil.getFullName(securityWorker1));
+        System.out.println(CenterEmployeeUtil.getFullName(manager1));
+
+        System.out.println(CenterEmployeeUtil.getSalaries(janitor1));
+        System.out.println(CenterEmployeeUtil.getSalaries(manager1));
+        System.out.println(CenterEmployeeUtil.getSalaries(securityWorker1));
+
+        System.out.println("Welcome to shop center system.");
         while(true){
             Scanner scanner = new Scanner(System.in);
-            System.out.println("Choose action: \n1) Display all employees\n2) Add new employee\n3)Exit program");
+            System.out.println("Choose action: \n1) Display all employees\n2) Add new employee\n3) Exit program");
             switch(scanner.next()){
                 case "1":
                     System.out.println(mallRegion1.getManager());
