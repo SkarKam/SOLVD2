@@ -1,21 +1,25 @@
-package Models;
+package models;
 
 import java.util.Arrays;
+import java.util.Objects;
 
-public class CenterWorkersSection {
+//rename
+public class MallRegion {
     private String sectionName;
     private Manager manager;
-    private Worker[] workers;
+    private Janitor[] janitors;
     private SecurityWorker[] securityWorkers;
 
-    public CenterWorkersSection(String sectionName, Manager manager, Worker[] workers, SecurityWorker[] securityWorkers) {
+    public MallRegion(String sectionName, Manager manager, Janitor[] janitors, SecurityWorker[] securityWorkers) {
         this.sectionName = sectionName;
         this.manager = manager;
-        this.workers = workers;
+        this.janitors = janitors;
         this.securityWorkers = securityWorkers;
     }
 
-    public CenterWorkersSection(String sectionName, Manager manager, Worker[] workers) {}
+    public MallRegion(String sectionName) {
+        this.sectionName = sectionName;
+    }
 
     public String getSectionName() {
         return sectionName;
@@ -41,17 +45,17 @@ public class CenterWorkersSection {
         }
     }
 
-    public Worker[] getWorkers() {
-        return workers;
+    public Janitor[] getWorkers() {
+        return janitors;
     }
 
-    public void setWorkers(Worker[] workers) {
-        this.workers = workers;
+    public void setWorkers(Janitor[] janitors) {
+        this.janitors = janitors;
     }
 
-    public void addWorkers(Worker worker){
-        if(worker!=null) {
-            this.workers[getSecurityWorkers().length] = worker;
+    public void addWorkers(Janitor janitor){
+        if(janitor !=null) {
+            this.janitors[getSecurityWorkers().length] = janitor;
         } else {
             throw new IllegalArgumentException("Worker cannot be null.");
         }
@@ -72,20 +76,20 @@ public class CenterWorkersSection {
 
     public int getAllWorkersSalary(){
         int result = 0;
-        for(Worker worker : workers){
-            result+=worker.getSalary();
+        for(Janitor janitor : janitors){
+            result+= janitor.getSalary();
         }
         return result;
     }
     public int getAllWorkersSectionAvgSalary(){
         int result = 0;
         int counter = 0;
-        for(Worker worker : workers){
-            result += worker.getSalary();
+        for(Janitor janitor : janitors){
+            result += janitor.getSalary();
             counter++;
         }
         for(SecurityWorker securityWorker : securityWorkers){
-            result += securityWorker.getSalary();
+            result += securityWorker.getHoursWorked();
             counter++;
         }
         result+=manager.getSalary();
@@ -98,8 +102,21 @@ public class CenterWorkersSection {
         return "\nCenterWorkersSection{" +
                 "sectionName='" + sectionName + '\'' +
                 "manager=" + manager +
-                "workers=" + Arrays.toString(workers) +
+                "workers=" + Arrays.toString(janitors) +
                 "securityWorkers=" + Arrays.toString(securityWorkers) +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        MallRegion that = (MallRegion) o;
+        return Objects.equals(sectionName, that.sectionName) && Objects.equals(manager, that.manager) && Objects.deepEquals(janitors, that.janitors) && Objects.deepEquals(securityWorkers, that.securityWorkers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(sectionName, manager, Arrays.hashCode(janitors), Arrays.hashCode(securityWorkers));
     }
 }

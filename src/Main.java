@@ -1,52 +1,53 @@
-import Models.*;
+import models.*;
 
+import java.awt.*;
 import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.Scanner;
 
 public class Main {
+
     public static void main(String[] args) {
 
         Shop shop1, shop2;
         Premise premise1, premise2;
-        Dimension dimension1, dimension2;
         ShopCenter shopCenter;
         Parking parking;
         Address address;
-        CenterWorkersSection centerWorkersSection1, centerWorkersSection2;
+        MallRegion mallRegion1, mallRegion2;
         SecurityWorker securityWorker1, securityWorker2, securityWorker3, securityWorker4;
-        Worker worker1, worker2, worker3, worker4;
+        Janitor janitor1, janitor2, janitor3, janitor4;
         Manager manager1, manager2;
 
 
-        shop1 = new Shop("Decatlon",3.5f, LocalDate.of(2024,8,10));
-        shop2 = new Shop("Carrefour",1.8f, LocalDate.of(2024,8,1));
+        shop1 = new Shop("Decatlon", LocalDate.of(2024,8,10));
+        shop2 = new Shop("Carrefour", LocalDate.of(2024,8,1));
 
-        dimension1 = new Dimension(20,41);
-        dimension2 = new Dimension(60,70);
 
-        premise1 = new Premise(shop1, dimension1);
-        premise2 = new Premise(shop2, dimension2);
+        premise1 = new Premise(shop1, new Dimension(20,40));
+        premise2 = new Premise(shop2, new Dimension(30,50));
 
         address = new Address("Lorne St","Sackville","Nova Scotia");
 
-        parking = new Parking(800,4);
+        parking = new Parking(4);
 
-        securityWorker1 = new SecurityWorker("John","Doe",4000);
-        securityWorker2 = new SecurityWorker("Oliver","Los",3800);
-        securityWorker3 = new SecurityWorker("George","Kos",4200);
-        securityWorker4 = new SecurityWorker("Noah","Tos",4100);
+        securityWorker1 = new SecurityWorker("John","Doe");
+        securityWorker2 = new SecurityWorker("Oliver","Los");
+        securityWorker3 = new SecurityWorker("George","Kos");
+        securityWorker4 = new SecurityWorker("Noah","Tos");
 
-        worker1 = new Worker("Arthur","Eos",3000);
-        worker2 = new Worker("Leo","Ross",2100);
-        worker3 = new Worker("Jack","Sos",2800);
-        worker4 = new Worker("Harry","Pot",2900);
+        janitor1 = new Janitor("Arthur","Eos");
+        janitor2 = new Janitor("Leo","Ross");
+        janitor3 = new Janitor("Jack","Sos");
+        janitor4 = new Janitor("Harry","Pot");
 
-        manager1 = new Manager("Olivia","Doe",6000);
-        manager2 = new Manager("Markus","Wulfhart",6000);
+        manager1 = new Manager("Olivia","Doe");
+        manager2 = new Manager("Markus","Wulfhart");
 
-        centerWorkersSection1 = new CenterWorkersSection("North", manager1, new Worker[] {worker1, worker2}, new SecurityWorker[]{securityWorker1, securityWorker2});
-        centerWorkersSection2 = new CenterWorkersSection("South", manager2, new Worker[] {worker3, worker4}, new SecurityWorker[]{securityWorker3, securityWorker4});
+        mallRegion1 = new MallRegion("North", manager1, new Janitor[] {janitor1, janitor2}, new SecurityWorker[]{securityWorker1, securityWorker2});
+        mallRegion2 = new MallRegion("South", manager2, new Janitor[] {janitor3, janitor4}, new SecurityWorker[]{securityWorker3, securityWorker4});
 
-        shopCenter = new ShopCenter("Sunnyville", new Premise[] {premise1, premise2}, parking, address, new CenterWorkersSection[]{ centerWorkersSection1, centerWorkersSection2 });
+        shopCenter = new ShopCenter("Sunnyville", parking, address);
 
 
         //Showing whole hierarchy
@@ -56,13 +57,12 @@ public class Main {
         //For m2
         System.out.println();
         System.out.println("Properties/method tests:\n");
-        System.out.println("Overload (m2): "+Premise.getCostForDimensionForMonth(40));
+        System.out.println("Overload (m2): "+Premise.getDimensionCost(40));
         //For width, length
-        System.out.println("Overload (width, length): "+Premise.getCostForDimensionForMonth(20,20));
+        System.out.println("Overload (width, length): "+Premise.getDimensionCost(20,20));
 
         //Testing static property and method
-        System.out.println("Property: "+Premise.getCostForM2ForMonth());
-        System.out.println("Method: "+Premise.getCostFor40M2ForYear());
+        System.out.println("Property: "+Premise.getMonthlyCost());
 
         //LocalDate
         System.out.println("LocalDate: "+premise1.getRentalDate());
@@ -71,8 +71,73 @@ public class Main {
         System.out.println("LocalDate: "+shop2.getPaymentDate());
 
         //Methods test
-        System.out.println("All normal workers (excluding security and manager):"+centerWorkersSection1.getAllWorkersSalary());
-        System.out.println("Avg salary of section workers(including security, workers, manager):"+centerWorkersSection1.getAllWorkersSectionAvgSalary());
-        System.out.println("Surface: " + dimension1.getSurface());
+        System.out.println("All normal workers (excluding security and manager):"+ mallRegion1.getAllWorkersSalary());
+        System.out.println("Avg salary of section workers(including security, workers, manager):"+ mallRegion1.getAllWorkersSectionAvgSalary());
+
+        CenterEmployee centerEmployee = new SecurityWorker("Adam","Kot");
+
+/*        System.out.println(CenterEmployeeUtil.getFullName(centerEmployee));*/
+
+        System.out.print("Welcome to shop center system.");
+        while(true){
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Choose action: \n1) Display all employees\n2) Add new employee\n3)Exit program");
+            switch(scanner.next()){
+                case "1":
+                    System.out.println(mallRegion1.getManager());
+                    System.out.println(Arrays.toString(mallRegion1.getWorkers()));
+                    System.out.println(Arrays.toString(mallRegion1.getSecurityWorkers()));
+                    break;
+                case "2":
+                    System.out.println("Write employee name:");
+                    String name  = scanner.next();
+                    System.out.println("Write employee surname:");
+                    String surname  = scanner.next();
+                    if(name.isBlank() || surname.isBlank()){
+                        System.out.println("Error: invalid name");
+                        break;
+                    }
+                    System.out.println("Choose type of worker: \n 1) Manager \n 2) Janitor \n 3) Security \n 4) Exit");
+
+                    switch(scanner.next()){
+                        case "1":
+                            try{
+                                CenterEmployee centerEmployee1 = new Manager(name,surname);
+                                System.out.println("Successfully added new manger named: "+centerEmployee1.getName() +" "+centerEmployee1.getSurname());
+                            }catch (Exception e){
+                                System.out.println(e.getMessage());
+                            }
+                            break;
+                        case "2":
+                            try{
+                                CenterEmployee centerEmployee1 = new Janitor(name,surname);
+                                System.out.println("Successfully added new manger named: "+centerEmployee1.getName() +" "+centerEmployee1.getSurname());
+                            }catch (Exception e){
+                                System.out.println(e.getMessage());
+                            }
+                            break;
+                        case "3":
+                            try{
+                                CenterEmployee centerEmployee1 = new SecurityWorker(name,surname);
+                                System.out.println("Successfully added new manger named: "+centerEmployee1.getName() +" "+centerEmployee1.getSurname());
+                            }catch (Exception e){
+                                System.out.println(e.getMessage());
+                            }
+                            break;
+                        case "4":
+                            break;
+                        default:
+                            System.out.println("You choose invalid option. Try again");
+                    }
+                    break;
+                case "3":
+                    System.out.println("Exiting program");
+                    System.exit(0);
+                default:
+                    System.out.println("Invalid option choice. Try again.");
+            }
+        }
+
     }
+
 }

@@ -1,18 +1,17 @@
-package Models;
+package models;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class Shop {
     private String shopName;
     private float shopRating;
     private LocalDate paymentDate;
 
-    public Shop(String shopName, float shopRating, LocalDate paymentDate) {
+    public Shop(String shopName, LocalDate paymentDate) {
         this.shopName = shopName;
-        this.shopRating = shopRating;
         this.paymentDate = paymentDate;
     }
-    public Shop() {}
 
     public float getShopRating() {
         return shopRating;
@@ -57,5 +56,18 @@ public class Shop {
                 "shopRating=" + shopRating +
                 "paymentDate=" + paymentDate +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Shop shop = (Shop) o;
+        return Float.compare(shopRating, shop.shopRating) == 0 && Objects.equals(shopName, shop.shopName) && Objects.equals(paymentDate, shop.paymentDate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(shopName, shopRating, paymentDate);
     }
 }

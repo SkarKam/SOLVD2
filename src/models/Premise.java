@@ -1,9 +1,11 @@
-package Models;
+package models;
 
 import java.time.LocalDate;
+import java.util.Objects;
+import java.awt.Dimension;
 
 public class Premise {
-    private static int costForM2ForMonth = 5000;
+    private static int monthlyCost = 5000;
     private Shop shop;
     private LocalDate rentalDate;
     private Dimension dimension;
@@ -17,16 +19,14 @@ public class Premise {
     public Premise(Dimension dimension) {
         this.dimension = dimension;
     }
-    public Premise(){
+
+    public static int getMonthlyCost() {
+        return monthlyCost;
     }
 
-    public static int getCostForM2ForMonth() {
-        return costForM2ForMonth;
-    }
-
-    public static void setCostForM2ForMonth(int costForM2ForMonth) {
-        if(costForM2ForMonth > 1000) {
-            Premise.costForM2ForMonth = costForM2ForMonth;
+    public static void setMonthlyCost(int monthlyCost) {
+        if(monthlyCost > 1000) {
+            Premise.monthlyCost = monthlyCost;
         } else {
             throw new IllegalArgumentException("costForM2 must be greater than 1000");
         }
@@ -79,19 +79,16 @@ public class Premise {
         }
     }
 
-    public int getCostForThisPremise(){
-        return getDimension().getSurface() * costForM2ForMonth;
+   public int getPremiseCost(){
+        return (int)dimension.getWidth()*(int)dimension.getHeight() * monthlyCost;
     }
 
-    public static int getCostFor40M2ForYear(){
-        return costForM2ForMonth *40*12;
-    }
 
-    public static int getCostForDimensionForMonth(int m2){
-        return costForM2ForMonth *m2;
+    public static int getDimensionCost(int m2){
+        return monthlyCost *m2;
     }
-    public static int getCostForDimensionForMonth(int width, int length){
-        return costForM2ForMonth *width*length;
+    public static int getDimensionCost(int width, int length){
+        return monthlyCost *width*length;
     }
 
     @Override
@@ -101,5 +98,18 @@ public class Premise {
                 "rentalDate=" + rentalDate +
                 "dimension=" + dimension +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Premise premise = (Premise) o;
+        return Objects.equals(shop, premise.shop) && Objects.equals(rentalDate, premise.rentalDate) && Objects.equals(dimension, premise.dimension);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(shop, rentalDate, dimension);
     }
 }

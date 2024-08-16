@@ -1,24 +1,21 @@
-package Models;
+package models;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 public class ShopCenter {
     private String shopCenterName;
     private Premise[] premises;
     private Parking parking;
     private Address address;
-    private CenterWorkersSection[] centerWorkersSections;
+    private MallRegion[] mallRegions;
 
-    public ShopCenter(String shopCenterName, Premise[] premises, Parking parking, Address address, CenterWorkersSection[] centerWorkersSections) {
+    public ShopCenter(String shopCenterName, Parking parking, Address address) {
         this.shopCenterName = shopCenterName;
-        this.premises = premises;
         this.parking = parking;
         this.address = address;
-        this.centerWorkersSections = centerWorkersSections;
     }
 
-    public ShopCenter() {
-    }
 
     public String getShopCenterName() {
         return shopCenterName;
@@ -60,16 +57,16 @@ public class ShopCenter {
         }
     }
 
-    public CenterWorkersSection[] getCenterWorkersSections() {
-        return centerWorkersSections;
+    public MallRegion[] getCenterWorkersSections() {
+        return mallRegions;
     }
 
-    public void setCenterWorkersSections(CenterWorkersSection[] centerWorkersSections) {
-        this.centerWorkersSections = centerWorkersSections;
+    public void setCenterWorkersSections(MallRegion[] mallRegions) {
+        this.mallRegions = mallRegions;
     }
-    public void addCenterWorkersSection(CenterWorkersSection centerWorkersSection) {
-        if(centerWorkersSections != null) {
-            this.centerWorkersSections[getCenterWorkersSections().length] = centerWorkersSection;
+    public void addCenterWorkersSection(MallRegion mallRegion) {
+        if(mallRegions != null) {
+            this.mallRegions[getCenterWorkersSections().length] = mallRegion;
         } else {
             throw new IllegalArgumentException("CenterWorkersSection cannot be blank.");
         }
@@ -82,7 +79,20 @@ public class ShopCenter {
                 "premises=" + Arrays.toString(premises) +
                 "parking=" + parking +
                 "address=" + address +
-                "centerWorkersSections=" + Arrays.toString(centerWorkersSections) +
+                "centerWorkersSections=" + Arrays.toString(mallRegions) +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ShopCenter that = (ShopCenter) o;
+        return Objects.equals(shopCenterName, that.shopCenterName) && Objects.deepEquals(premises, that.premises) && Objects.equals(parking, that.parking) && Objects.equals(address, that.address) && Objects.deepEquals(mallRegions, that.mallRegions);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(shopCenterName, Arrays.hashCode(premises), parking, address, Arrays.hashCode(mallRegions));
     }
 }
