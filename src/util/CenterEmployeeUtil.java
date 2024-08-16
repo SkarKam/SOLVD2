@@ -4,6 +4,7 @@ import models.CenterEmployee;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 
 public class CenterEmployeeUtil {
     private CenterEmployeeUtil() {}
@@ -15,8 +16,8 @@ public class CenterEmployeeUtil {
     }
     public static String parseDateOfEmployement(CenterEmployee centerEmployee){
 
-            DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-            return dateFormat.format(centerEmployee.getDateOfEmployment());
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            return centerEmployee.getDateOfEmployment().format(formatter);
     }
     public static int getSalaries(CenterEmployee centerEmployee){
         return centerEmployee.calculateSalary();

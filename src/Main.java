@@ -75,9 +75,6 @@ public class Main {
         System.out.println("All normal workers (excluding security and manager):"+ mallRegion1.getAllWorkersSalary());
         System.out.println("Avg salary of section workers(including security, workers, manager):"+ mallRegion1.getAllWorkersSectionAvgSalary());
 
-        CenterEmployee centerEmployee = new SecurityWorker("Adam","Kot");
-
-/*        System.out.println(CenterEmployeeUtil.getFullName(centerEmployee));*/
 
         janitor1.setSalary(3000);
         manager1.setSalary(5000);
@@ -87,6 +84,11 @@ public class Main {
         System.out.println(CenterEmployeeUtil.getFullName(janitor1));
         System.out.println(CenterEmployeeUtil.getFullName(securityWorker1));
         System.out.println(CenterEmployeeUtil.getFullName(manager1));
+
+        System.out.println(CenterEmployeeUtil.parseDateOfEmployement(janitor1));
+        System.out.println(CenterEmployeeUtil.parseDateOfEmployement(securityWorker1));
+        System.out.println(CenterEmployeeUtil.parseDateOfEmployement(manager1));
+
 
         System.out.println(CenterEmployeeUtil.getSalaries(janitor1));
         System.out.println(CenterEmployeeUtil.getSalaries(manager1));
