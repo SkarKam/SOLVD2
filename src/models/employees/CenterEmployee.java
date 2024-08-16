@@ -1,4 +1,4 @@
-package models;
+package models.employees;
 
 import java.time.LocalDate;
 import java.util.Objects;
@@ -12,6 +12,7 @@ public abstract class CenterEmployee {
         this.name = name;
         this.surname = surname;
         dateOfEmployment = LocalDate.now();
+
     }
 
     public String getName() {

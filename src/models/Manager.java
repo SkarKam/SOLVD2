@@ -1,5 +1,7 @@
 package models;
 
+import models.employees.CenterEmployee;
+
 import java.util.Objects;
 
 public class Manager extends CenterEmployee {
