@@ -1,6 +1,6 @@
 package models;
 
-import src.models.employees.CenterEmployee;
+import models.employees.CenterEmployee;
 
 import java.util.Objects;
 

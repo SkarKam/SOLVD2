@@ -1,6 +1,6 @@
 
 import models.*;
-import src.models.employees.CenterEmployee;
+import models.employees.CenterEmployee;
 import utils.CenterEmployeeUtil;
 
 import java.awt.*;

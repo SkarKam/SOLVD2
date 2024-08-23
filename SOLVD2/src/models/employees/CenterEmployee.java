@@ -1,4 +1,4 @@
-package src.models.employees;
+package models.employees;
 
 import java.time.LocalDate;
 import java.util.Objects;
