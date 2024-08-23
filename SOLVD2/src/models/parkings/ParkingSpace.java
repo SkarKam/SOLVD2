@@ -1,4 +1,4 @@
-package models;
+package models.parkings;
 
 import java.awt.*;
 import java.util.Objects;

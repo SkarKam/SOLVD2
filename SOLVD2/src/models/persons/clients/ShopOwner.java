@@ -1,6 +1,6 @@
 package models.persons.clients;
 
-import models.Shop;
+import models.premises.Shop;
 import models.persons.Person;
 
 import java.util.Arrays;

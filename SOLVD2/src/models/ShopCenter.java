@@ -1,5 +1,8 @@
 package models;
 
+import models.parkings.Parking;
+import models.premises.Premise;
+
 import java.util.Arrays;
 import java.util.Objects;
 
