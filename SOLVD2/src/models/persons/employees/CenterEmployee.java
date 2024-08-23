@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 public abstract class CenterEmployee extends Person implements ICenterEmployee{
+    private static final String centerName = "SunnyCenter";
     protected LocalDate dateOfEmployment;
 
     public CenterEmployee(String name, String surname) {
