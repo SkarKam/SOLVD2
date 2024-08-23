@@ -20,6 +20,14 @@ public final class ShopOwner extends Person {
         this.rating = rating;
     }
 
+    public Shop[] getShops() {
+        return shops;
+    }
+
+    public void setShops(Shop[] shops) {
+        this.shops = shops;
+    }
+
     public int getRating() {
         return rating;
     }
