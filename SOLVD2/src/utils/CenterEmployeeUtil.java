@@ -1,6 +1,6 @@
 package utils;
 
-import models.employees.CenterEmployee;
+import models.persons.employees.CenterEmployee;
 
 import java.time.format.DateTimeFormatter;
 

@@ -1,18 +1,14 @@
-package models.employees;
+package models.persons;
 
-import java.time.LocalDate;
 import java.util.Objects;
 
-public abstract class CenterEmployee {
+public abstract class Person implements IPerson {
     protected String name;
     protected String surname;
-    protected LocalDate dateOfEmployment;
 
-    public CenterEmployee(String name, String surname) {
+    public Person(String name, String surname) {
         this.name = name;
         this.surname = surname;
-        dateOfEmployment = LocalDate.now();
-
     }
 
     public String getName() {
@@ -39,33 +35,25 @@ public abstract class CenterEmployee {
         }
     }
 
-    public LocalDate getDateOfEmployment() {
-        return dateOfEmployment;
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                '}';
     }
-
-
-    public abstract int calculateSalary();
 
     @Override
     public boolean equals(Object o) {
-
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        CenterEmployee that = (CenterEmployee) o;
-        return Objects.equals(name, that.name) && Objects.equals(surname, that.surname);
+        Person person = (Person) o;
+        return Objects.equals(name, person.name) && Objects.equals(surname, person.surname);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(name, surname);
-    }
-
-    @Override
-    public String toString() {
-        return "CenterEmployee{" +
-                "name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", dateOfEmployment=" + dateOfEmployment +
-                '}';
     }
 }

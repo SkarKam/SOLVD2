@@ -2,7 +2,7 @@ package models;
 
 import java.util.Objects;
 
-public class Address {
+public class Address implements IAdrress {
     private String street;
     private String city;
     private String state;

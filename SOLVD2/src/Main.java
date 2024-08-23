@@ -1,9 +1,11 @@
 
 import models.*;
-import models.employees.CenterEmployee;
-import models.employees.Janitor;
-import models.employees.Manager;
-import models.employees.SecurityWorker;
+import models.persons.Person;
+import models.persons.clients.ShopOwner;
+import models.persons.employees.CenterEmployee;
+import models.persons.employees.Janitor;
+import models.persons.employees.Manager;
+import models.persons.employees.SecurityWorker;
 import utils.CenterEmployeeUtil;
 
 import java.awt.*;
@@ -79,7 +81,6 @@ public class Main {
         //Methods test
         System.out.println("All normal workers (excluding security and manager):"+ mallRegion1.getAllWorkersSalary());
         System.out.println("Avg salary of section workers(including security, workers, manager):"+ mallRegion1.getAllWorkersSectionAvgSalary());
-
 
         janitor1.setSalary(3000);
         manager1.setSalary(5000);

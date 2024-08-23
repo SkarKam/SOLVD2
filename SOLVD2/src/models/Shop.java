@@ -3,7 +3,7 @@ package models;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class Shop {
+public class Shop implements IShop{
     private String shopName;
     private float shopRating;
     private LocalDate paymentDate;

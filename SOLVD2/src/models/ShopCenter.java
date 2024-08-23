@@ -3,7 +3,7 @@ package models;
 import java.util.Arrays;
 import java.util.Objects;
 
-public class ShopCenter {
+public class ShopCenter implements IShopCenter {
     private String shopCenterName;
     private Premise[] premises;
     private Parking parking;

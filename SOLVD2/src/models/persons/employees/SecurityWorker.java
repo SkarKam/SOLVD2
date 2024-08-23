@@ -1,4 +1,4 @@
-package models.employees;
+package models.persons.employees;
 
 import java.util.Objects;
 

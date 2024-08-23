@@ -1,8 +1,8 @@
 package models;
 
-import models.employees.Janitor;
-import models.employees.Manager;
-import models.employees.SecurityWorker;
+import models.persons.employees.Janitor;
+import models.persons.employees.Manager;
+import models.persons.employees.SecurityWorker;
 
 import java.util.Arrays;
 import java.util.Objects;

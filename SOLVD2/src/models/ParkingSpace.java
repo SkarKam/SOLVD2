@@ -4,7 +4,7 @@ import java.awt.*;
 import java.util.Objects;
 
 public class ParkingSpace {
-    private Dimension dimension;
+    private final Dimension dimension;
     private boolean isPaid;
     private boolean isOccupied;
     private static int cost = 10;
@@ -19,13 +19,6 @@ public class ParkingSpace {
         return dimension;
     }
 
-    public void setDimension(Dimension dimension) {
-        if(dimension != null) {
-            this.dimension = dimension;
-        } else {
-            throw new IllegalArgumentException("Dimension cannot be null");
-        }
-    }
 
     public boolean isPaid() {
         return isPaid;
