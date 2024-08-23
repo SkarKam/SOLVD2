@@ -4,9 +4,14 @@ import java.util.Objects;
 
 //Add fields
 public class SecurityWorker extends CenterEmployee {
+
     private int rate;
     private int hoursWorked;
-    private static String securityCompany = "SecurityComp";
+    private static String securityCompany;
+
+    static {
+        securityCompany = "SecCom";
+    }
 
     public SecurityWorker(String name, String surname) {
         super(name, surname);

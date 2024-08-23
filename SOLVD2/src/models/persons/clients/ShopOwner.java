@@ -6,6 +6,9 @@ import models.persons.Person;
 import java.util.Arrays;
 import java.util.Objects;
 
+/**
+ * Shop owner - client of the shopCenter.
+ */
 public final class ShopOwner extends Person {
 
     private int rating;
