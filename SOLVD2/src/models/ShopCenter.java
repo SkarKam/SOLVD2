@@ -3,10 +3,11 @@ package models;
 import models.parkings.Parking;
 import models.premises.Premise;
 
+import java.io.*;
 import java.util.Arrays;
 import java.util.Objects;
 
-public class ShopCenter implements IShopCenter {
+public class ShopCenter implements IShopCenter, Serializable {
     private String shopCenterName;
     private Premise[] premises;
     private Parking parking;

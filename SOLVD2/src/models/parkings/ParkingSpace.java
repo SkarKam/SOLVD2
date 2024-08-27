@@ -1,9 +1,10 @@
 package models.parkings;
 
 import java.awt.*;
+import java.io.Serializable;
 import java.util.Objects;
 
-public class ParkingSpace {
+public class ParkingSpace implements Serializable {
     private final Dimension dimension;
     private boolean isPaid;
     private boolean isOccupied;
@@ -47,6 +48,8 @@ public class ParkingSpace {
             throw new IllegalArgumentException("Cost cannot be negative");
         }
     }
+
+
 
     @Override
     public boolean equals(Object o) {

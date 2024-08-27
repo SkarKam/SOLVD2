@@ -1,9 +1,12 @@
 package models.premises;
 
+import models.ShopCenter;
+
+import java.io.*;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class Shop implements IShop{
+public class Shop implements IShop, Serializable {
     private String shopName;
     private float shopRating;
     private LocalDate paymentDate;
@@ -46,6 +49,23 @@ public class Shop implements IShop{
             this.paymentDate = paymentDate;
         } else {
             throw  new IllegalArgumentException("Payment Date cannot be null");
+        }
+    }
+
+    public static void save(Shop shop){
+        try(ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("./SOLVD2/files/shop.txt"))){
+            objectOutputStream.writeObject(shop);
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+    public static Shop load(){
+        try(ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("./SOLVD2/files/shop.txt"))) {
+            return (Shop) objectInputStream.readObject();
+        } catch (IOException e) {
+            throw new RuntimeException("There is no file in folder\n" + e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException("Class exception");
         }
     }
 

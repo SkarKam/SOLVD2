@@ -102,6 +102,13 @@ public class Main {
         System.out.println(CenterEmployeeUtil.getSalaries(securityWorker1));
 
         System.out.println("Welcome to shop center system.");
+
+
+        Shop.save(shop1);
+        Shop shop3 = Shop.load();
+
+        System.out.println("\n"+shop1.equals(shop3)+"\n");
+
         while(true){
             Scanner scanner = new Scanner(System.in);
             System.out.println("Choose action: \n1) Display all employees\n2) Add new employee\n3) Exit program");

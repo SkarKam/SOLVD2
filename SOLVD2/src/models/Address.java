@@ -1,8 +1,9 @@
 package models;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Address implements IAdrress {
+public class Address implements IAdrress, Serializable {
     private String street;
     private String city;
     private String state;
