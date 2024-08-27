@@ -107,7 +107,7 @@ public class Main {
         Shop.save(shop1);
         Shop shop3 = Shop.load();
 
-        System.out.println("\n"+shop1.equals(shop3)+"\n");
+        System.out.println("\nIs shop saved correctly: "+shop1.equals(shop3)+"\n");
 
         while(true){
             Scanner scanner = new Scanner(System.in);
