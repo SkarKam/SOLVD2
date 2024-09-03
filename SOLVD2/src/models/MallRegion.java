@@ -6,15 +6,16 @@ import models.persons.employees.SecurityWorker;
 
 import java.util.Arrays;
 import java.util.Objects;
+import java.util.Set;
 
 //rename
 public class MallRegion {
     private String sectionName;
     private Manager manager;
-    private Janitor[] janitors;
-    private SecurityWorker[] securityWorkers;
+    private Set<Janitor> janitors;
+    private Set<SecurityWorker> securityWorkers;
 
-    public MallRegion(String sectionName, Manager manager, Janitor[] janitors, SecurityWorker[] securityWorkers) {
+    public MallRegion(String sectionName, Manager manager, Set<Janitor> janitors,Set<SecurityWorker> securityWorkers) {
         this.sectionName = sectionName;
         this.manager = manager;
         this.janitors = janitors;
@@ -49,32 +50,32 @@ public class MallRegion {
         }
     }
 
-    public Janitor[] getWorkers() {
+    public Set<Janitor> getWorkers() {
         return janitors;
     }
 
-    public void setWorkers(Janitor[] janitors) {
+    public void setWorkers(Set<Janitor> janitors) {
         this.janitors = janitors;
     }
 
     public void addWorkers(Janitor janitor){
         if(janitor !=null) {
-            this.janitors[getSecurityWorkers().length] = janitor;
+            this.janitors.add(janitor);
         } else {
             throw new IllegalArgumentException("Worker cannot be null.");
         }
     }
 
-    public SecurityWorker[] getSecurityWorkers() {
+    public Set<SecurityWorker> getSecurityWorkers() {
         return securityWorkers;
     }
 
-    public void setSecurityWorkers(SecurityWorker[] securityWorkers) {
+    public void setSecurityWorkers(Set<SecurityWorker> securityWorkers) {
         this.securityWorkers = securityWorkers;
     }
     public void addSecurityWorker(SecurityWorker securityWorkers) {
         if(securityWorkers!=null) {
-            this.securityWorkers[getSecurityWorkers().length] = securityWorkers;
+            this.securityWorkers.add(securityWorkers);
         } else {throw new IllegalArgumentException("Security worker cannot be null.");}
     }
 
@@ -106,8 +107,8 @@ public class MallRegion {
         return "\nCenterWorkersSection{" +
                 "sectionName='" + sectionName + '\'' +
                 "manager=" + manager +
-                "workers=" + Arrays.toString(janitors) +
-                "securityWorkers=" + Arrays.toString(securityWorkers) +
+                "workers=" + janitors +
+                "securityWorkers=" + securityWorkers +
                 '}';
     }
 
@@ -116,11 +117,11 @@ public class MallRegion {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         MallRegion that = (MallRegion) o;
-        return Objects.equals(sectionName, that.sectionName) && Objects.equals(manager, that.manager) && Objects.deepEquals(janitors, that.janitors) && Objects.deepEquals(securityWorkers, that.securityWorkers);
+        return Objects.equals(sectionName, that.sectionName) && Objects.equals(manager, that.manager) && Objects.equals(janitors, that.janitors) && Objects.equals(securityWorkers, that.securityWorkers);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(sectionName, manager, Arrays.hashCode(janitors), Arrays.hashCode(securityWorkers));
+        return Objects.hash(sectionName, manager, janitors, securityWorkers);
     }
 }

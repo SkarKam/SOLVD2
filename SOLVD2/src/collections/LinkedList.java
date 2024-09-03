@@ -57,8 +57,14 @@ public class LinkedList<T> {
         }
         size++;
 
-
     }
+
+    public void clear(){
+        head = null;
+        tail = null;
+        size = 0;
+    }
+
     public void removeFirst() {
         if(head == null){
             throw new NoSuchElementException();

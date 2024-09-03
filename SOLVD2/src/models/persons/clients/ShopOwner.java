@@ -1,9 +1,11 @@
 package models.persons.clients;
 
+import collections.LinkedList;
+import models.ShopCenter;
 import models.premises.Shop;
 import models.persons.Person;
 
-import java.util.Arrays;
+
 import java.util.Objects;
 
 /**
@@ -12,7 +14,7 @@ import java.util.Objects;
 public final class ShopOwner extends Person {
 
     private int rating;
-    private Shop[] shops;
+    private LinkedList<Shop> shops;
 
 
     public ShopOwner(String name, String surname, int rating) {
@@ -20,11 +22,11 @@ public final class ShopOwner extends Person {
         this.rating = rating;
     }
 
-    public Shop[] getShops() {
+    public LinkedList<Shop> getShops() {
         return shops;
     }
 
-    public void setShops(Shop[] shops) {
+    public void setShops(LinkedList<Shop> shops) {
         this.shops = shops;
     }
 
@@ -39,7 +41,7 @@ public final class ShopOwner extends Person {
     public String toString() {
         return "ShopOwner{" +
                 "rating=" + rating +
-                ", shops=" + Arrays.toString(shops) +
+                ", shops=" + shops +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 '}';
@@ -51,11 +53,11 @@ public final class ShopOwner extends Person {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         ShopOwner shopOwner = (ShopOwner) o;
-        return rating == shopOwner.rating && Objects.deepEquals(shops, shopOwner.shops);
+        return rating == shopOwner.rating && Objects.equals(shops, shopOwner.shops);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), rating, Arrays.hashCode(shops));
+        return Objects.hash(super.hashCode(), rating, shops);
     }
 }

@@ -5,14 +5,16 @@ import models.premises.Premise;
 
 import java.io.*;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 public class ShopCenter implements IShopCenter, Serializable {
     private String shopCenterName;
-    private Premise[] premises;
+    private List<Premise> premises;
     private Parking parking;
     private Address address;
-    private MallRegion[] mallRegions;
+    private Set<MallRegion> mallRegions;
 
     public ShopCenter(String shopCenterName, Parking parking, Address address) {
         this.shopCenterName = shopCenterName;
@@ -33,11 +35,11 @@ public class ShopCenter implements IShopCenter, Serializable {
         }
     }
 
-    public Premise[] getPremises() {
+    public List<Premise> getPremises() {
         return premises;
     }
 
-    public void setPremises(Premise[] premises) {
+    public void setPremises(List<Premise> premises) {
         this.premises = premises;
     }
 
@@ -61,16 +63,16 @@ public class ShopCenter implements IShopCenter, Serializable {
         }
     }
 
-    public MallRegion[] getCenterWorkersSections() {
+    public Set<MallRegion> getMallRegion() {
         return mallRegions;
     }
 
-    public void setCenterWorkersSections(MallRegion[] mallRegions) {
+    public void setCenterWorkersSections(Set<MallRegion> mallRegions) {
         this.mallRegions = mallRegions;
     }
     public void addCenterWorkersSection(MallRegion mallRegion) {
         if(mallRegions != null) {
-            this.mallRegions[getCenterWorkersSections().length] = mallRegion;
+            this.mallRegions.add(mallRegion);
         } else {
             throw new IllegalArgumentException("CenterWorkersSection cannot be blank.");
         }
@@ -80,10 +82,10 @@ public class ShopCenter implements IShopCenter, Serializable {
     public String toString() {
         return "\nShopCenter{" +
                 "shopCenterName='" + shopCenterName + '\'' +
-                "premises=" + Arrays.toString(premises) +
+                "premises=" + premises +
                 "parking=" + parking +
                 "address=" + address +
-                "centerWorkersSections=" + Arrays.toString(mallRegions) +
+                "centerWorkersSections=" + mallRegions +
                 '}';
     }
 
@@ -92,11 +94,11 @@ public class ShopCenter implements IShopCenter, Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ShopCenter that = (ShopCenter) o;
-        return Objects.equals(shopCenterName, that.shopCenterName) && Objects.deepEquals(premises, that.premises) && Objects.equals(parking, that.parking) && Objects.equals(address, that.address) && Objects.deepEquals(mallRegions, that.mallRegions);
+        return Objects.equals(shopCenterName, that.shopCenterName) && Objects.equals(premises, that.premises) && Objects.equals(parking, that.parking) && Objects.equals(address, that.address) && Objects.equals(mallRegions, that.mallRegions);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(shopCenterName, Arrays.hashCode(premises), parking, address, Arrays.hashCode(mallRegions));
+        return Objects.hash(shopCenterName, premises, parking, address, mallRegions);
     }
 }

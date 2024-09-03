@@ -12,7 +12,9 @@ import utils.CenterEmployeeUtil;
 import java.awt.*;
 import java.time.LocalDate;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Scanner;
+import java.util.Set;
 
 public class Main {
 
@@ -53,8 +55,22 @@ public class Main {
         manager1 = new Manager("Olivia","Doe");
         manager2 = new Manager("Markus","Wulfhart");
 
-        mallRegion1 = new MallRegion("North", manager1, new Janitor[] {janitor1, janitor2}, new SecurityWorker[]{securityWorker1, securityWorker2});
-        mallRegion2 = new MallRegion("South", manager2, new Janitor[] {janitor3, janitor4}, new SecurityWorker[]{securityWorker3, securityWorker4});
+        Set<Janitor> temp = new HashSet();
+        temp.add(janitor1);
+        temp.add(janitor2);
+        Set<Janitor> temp2 = new HashSet();
+        temp2.add(janitor3);
+        temp2.add(janitor4);
+        Set<SecurityWorker> temp3 = new HashSet();
+        temp3.add(securityWorker1);
+        temp3.add(securityWorker2);
+        Set<SecurityWorker> temp4 = new HashSet();
+        temp4.add(securityWorker3);
+        temp4.add(securityWorker4);
+
+
+        mallRegion1 = new MallRegion("North", manager1, temp, temp3);
+        mallRegion2 = new MallRegion("South", manager2, temp2,temp4);
 
         shopCenter = new ShopCenter("Sunnyville", parking, address);
 
@@ -115,8 +131,8 @@ public class Main {
             switch(scanner.next()){
                 case "1":
                     System.out.println(mallRegion1.getManager());
-                    System.out.println(Arrays.toString(mallRegion1.getWorkers()));
-                    System.out.println(Arrays.toString(mallRegion1.getSecurityWorkers()));
+                    System.out.println((mallRegion1));
+                    System.out.println(mallRegion1.getSecurityWorkers());
                     break;
                 case "2":
                     System.out.println("Write employee name:");

@@ -5,15 +5,29 @@ import java.io.Serializable;
 import java.util.Objects;
 
 public class ParkingSpace implements Serializable {
+    private int id;
     private final Dimension dimension;
     private boolean isPaid;
     private boolean isOccupied;
     private static int cost = 10;
 
-    public ParkingSpace(Dimension dimension) {
+    public ParkingSpace(int id, Dimension dimension) {
+        this.id = id;
         this.dimension = dimension;
         this.isPaid = false;
         this.isOccupied = false;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        if(id>0) {
+            this.id = id;
+        } else {
+            throw new IllegalArgumentException("ID must be greater than 0");
+        }
     }
 
     public Dimension getDimension() {

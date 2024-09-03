@@ -3,13 +3,15 @@ package models.parkings;
 
 import java.time.LocalTime;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 public class Parking {
     private int parkingLevels;
     private LocalTime openTime;
     private LocalTime closeTime;
-    private ParkingSpace[] parkingSpaces;
+    private Map<Integer,ParkingSpace> parkingSpaces;
 
     public Parking(int parkingLevels) {
         this.parkingLevels = parkingLevels;
@@ -28,7 +30,7 @@ public class Parking {
     }
 
     public int getParkingSpacesPerLevels(){
-        return parkingSpaces.length/parkingLevels;
+        return parkingSpaces.size()/parkingLevels;
     }
 
     public LocalTime getCloseTime() {
@@ -57,11 +59,11 @@ public class Parking {
         } else throw new IllegalArgumentException("Close Time must be greater than open Time");
     }
 
-    public ParkingSpace[] getParkingSpaces() {
+    public Map<Integer,ParkingSpace> getParkingSpaces() {
         return parkingSpaces;
     }
 
-    public void setParkingSpaces(ParkingSpace[] parkingSpaces) {
+    public void setParkingSpaces(Map<Integer,ParkingSpace> parkingSpaces) {
         this.parkingSpaces = parkingSpaces;
     }
 
@@ -70,12 +72,12 @@ public class Parking {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Parking parking = (Parking) o;
-        return parkingLevels == parking.parkingLevels && Objects.equals(openTime, parking.openTime) && Objects.equals(closeTime, parking.closeTime) && Objects.deepEquals(parkingSpaces, parking.parkingSpaces);
+        return parkingLevels == parking.parkingLevels && Objects.equals(openTime, parking.openTime) && Objects.equals(closeTime, parking.closeTime) && Objects.equals(parkingSpaces, parking.parkingSpaces);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(parkingLevels, openTime, closeTime, Arrays.hashCode(parkingSpaces));
+        return Objects.hash(parkingLevels, openTime, closeTime, parkingSpaces);
     }
 
     @Override
@@ -84,7 +86,7 @@ public class Parking {
                 "parkingLevels=" + parkingLevels +
                 ", openTime=" + openTime +
                 ", closeTime=" + closeTime +
-                ", parkingSpaces=" + Arrays.toString(parkingSpaces) +
+                ", parkingSpaces=" + parkingSpaces +
                 '}';
     }
 }
