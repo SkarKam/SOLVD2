@@ -1,5 +1,8 @@
 package models;
 
+import exception.BlankValueException;
+import exception.NullValueException;
+
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -22,7 +25,7 @@ public class Address implements IAdrress, Serializable {
         if(!street.isBlank()) {
             this.street = street;
         } else{
-            throw new IllegalArgumentException("Street cannot be blank.");
+            throw new BlankValueException("Street cannot be blank.");
         }
     }
 
@@ -34,7 +37,7 @@ public class Address implements IAdrress, Serializable {
         if(!city.isBlank()) {
             this.city = city;
         } else {
-            throw new IllegalArgumentException("City cannot be blank.");
+            throw new BlankValueException("City cannot be blank.");
         }
     }
 
@@ -46,7 +49,7 @@ public class Address implements IAdrress, Serializable {
         if(!state.isBlank()) {
             this.state = state;
         } else {
-            throw new IllegalArgumentException("State cannot be blank.");
+            throw new BlankValueException("State cannot be blank.");
         }
     }
 

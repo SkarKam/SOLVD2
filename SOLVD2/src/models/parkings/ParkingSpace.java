@@ -1,5 +1,8 @@
 package models.parkings;
 
+import com.sun.jdi.VMDisconnectedException;
+import exception.NegativeValueException;
+
 import java.awt.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -26,7 +29,7 @@ public class ParkingSpace implements Serializable {
         if(id>0) {
             this.id = id;
         } else {
-            throw new IllegalArgumentException("ID must be greater than 0");
+            throw new NegativeValueException("ID must be greater than 0");
         }
     }
 
@@ -59,7 +62,7 @@ public class ParkingSpace implements Serializable {
         if(cost >= 0) {
             ParkingSpace.cost = cost;
         } else {
-            throw new IllegalArgumentException("Cost cannot be negative");
+            throw new NegativeValueException("Cost cannot be negative");
         }
     }
 

@@ -1,5 +1,9 @@
 package models.premises;
 
+import exception.AlreadyTakenException;
+import exception.NullValueException;
+import exception.ValidationException;
+
 import java.time.LocalDate;
 import java.util.Objects;
 import java.awt.Dimension;
@@ -28,7 +32,7 @@ public class Premise {
         if(monthlyCost > 1000) {
             Premise.monthlyCost = monthlyCost;
         } else {
-            throw new IllegalArgumentException("costForM2 must be greater than 1000");
+            throw new ValidationException("costForM2 must be greater than 1000");
         }
     }
 
@@ -50,7 +54,7 @@ public class Premise {
                 this.shop = shop;
                 setRentalDate();
             } else {
-                throw new IllegalArgumentException("Other shop already use this premise");
+                throw new AlreadyTakenException("Other shop already use this premise");
             }
         }
 
@@ -62,7 +66,7 @@ public class Premise {
         if(dimension != null) {
             this.dimension = dimension;
         } else {
-            throw new IllegalArgumentException("Dismension cannot be null");
+            throw new NullValueException("Dismension cannot be null");
         }
     }
 

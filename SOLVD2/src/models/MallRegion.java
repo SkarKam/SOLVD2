@@ -1,5 +1,7 @@
 package models;
 
+import exception.BlankValueException;
+import exception.NullValueException;
 import models.persons.employees.Janitor;
 import models.persons.employees.Manager;
 import models.persons.employees.SecurityWorker;
@@ -34,7 +36,7 @@ public class MallRegion {
         if(!sectionName.isBlank()) {
             this.sectionName = sectionName;
         } else {
-            throw new IllegalArgumentException("Section name cannot be blank.");
+            throw new BlankValueException("Section name cannot be blank.");
         }
     }
 
@@ -46,7 +48,7 @@ public class MallRegion {
         if(manager!=null) {
             this.manager = manager;
         } else {
-            throw new IllegalArgumentException("Manager cannot be null.");
+            throw new NullValueException("Manager cannot be null.");
         }
     }
 
@@ -62,7 +64,7 @@ public class MallRegion {
         if(janitor !=null) {
             this.janitors.add(janitor);
         } else {
-            throw new IllegalArgumentException("Worker cannot be null.");
+            throw new NullValueException("Worker cannot be null.");
         }
     }
 
@@ -76,7 +78,7 @@ public class MallRegion {
     public void addSecurityWorker(SecurityWorker securityWorkers) {
         if(securityWorkers!=null) {
             this.securityWorkers.add(securityWorkers);
-        } else {throw new IllegalArgumentException("Security worker cannot be null.");}
+        } else {throw new NullValueException("Security worker cannot be null.");}
     }
 
     public int getAllWorkersSalary(){

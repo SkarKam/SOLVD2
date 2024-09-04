@@ -1,6 +1,10 @@
 package models.parkings;
 
 
+import exception.NegativeValueException;
+import exception.NullValueException;
+import exception.ValidationException;
+
 import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.List;
@@ -26,7 +30,7 @@ public class Parking {
     public void setParkingLevels(int parkingLevels) {
         if(parkingLevels>=1) {
             this.parkingLevels = parkingLevels;
-        } else throw new IllegalArgumentException("Parking Levels must be greater or equal 1");
+        } else throw new NegativeValueException("Parking Levels must be greater or equal 1");
     }
 
     public int getParkingSpacesPerLevels(){
@@ -39,11 +43,11 @@ public class Parking {
 
     public void setCloseTime(LocalTime closeTime) {
         if(closeTime == null){
-            throw new IllegalArgumentException("Close Time cannot be null");
+            throw new NullValueException("Close Time cannot be null");
         }
         if(closeTime.isAfter(openTime)) {
             this.closeTime = closeTime;
-        } else throw new IllegalArgumentException("Close Time must be greater than open Time");
+        } else throw new ValidationException("Close Time must be greater than open Time");
     }
 
     public LocalTime getOpenTime() {
@@ -52,11 +56,11 @@ public class Parking {
 
     public void setOpenTime(LocalTime openTime) {
         if(openTime == null){
-            throw new IllegalArgumentException("Open Time cannot be null");
+            throw new NullValueException("Open Time cannot be null");
         }
         if(openTime.isBefore(closeTime)) {
             this.openTime = openTime;
-        } else throw new IllegalArgumentException("Close Time must be greater than open Time");
+        } else throw new ValidationException("Close Time must be greater than open Time");
     }
 
     public Map<Integer,ParkingSpace> getParkingSpaces() {

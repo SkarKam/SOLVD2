@@ -1,5 +1,7 @@
 package models;
 
+import exception.BlankValueException;
+import exception.NullValueException;
 import models.parkings.Parking;
 import models.premises.Premise;
 
@@ -8,8 +10,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.logging.Logger;
 
 public class ShopCenter implements IShopCenter, Serializable {
+    private static final Logger logger = Logger.getLogger(ShopCenter.class.getName());
+
     private String shopCenterName;
     private List<Premise> premises;
     private Parking parking;
@@ -17,6 +22,7 @@ public class ShopCenter implements IShopCenter, Serializable {
     private Set<MallRegion> mallRegions;
 
     public ShopCenter(String shopCenterName, Parking parking, Address address) {
+        logger.info("Create ShopCenter with name " + shopCenterName);
         this.shopCenterName = shopCenterName;
         this.parking = parking;
         this.address = address;
@@ -31,7 +37,8 @@ public class ShopCenter implements IShopCenter, Serializable {
         if(!shopCenterName.isBlank()) {
             this.shopCenterName = shopCenterName;
         } else {
-            throw new IllegalArgumentException("Shop center name cannot be blank.");
+            logger.info("Shop center name is blank");
+            throw new BlankValueException("Shop center name cannot be blank.");
         }
     }
 
@@ -59,7 +66,7 @@ public class ShopCenter implements IShopCenter, Serializable {
         if(address != null) {
             this.address = address;
         } else {
-            throw new IllegalArgumentException("Address cannot be blank.");
+            throw new NullValueException("Address cannot be blank.");
         }
     }
 
@@ -74,7 +81,7 @@ public class ShopCenter implements IShopCenter, Serializable {
         if(mallRegions != null) {
             this.mallRegions.add(mallRegion);
         } else {
-            throw new IllegalArgumentException("CenterWorkersSection cannot be blank.");
+            throw new NullValueException("CenterWorkersSection cannot be blank.");
         }
     }
 

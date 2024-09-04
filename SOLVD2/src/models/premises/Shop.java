@@ -1,5 +1,8 @@
 package models.premises;
 
+import exception.FileException;
+import exception.NullValueException;
+import exception.ValidationException;
 import models.ShopCenter;
 
 import java.io.*;
@@ -24,7 +27,7 @@ public class Shop implements IShop, Serializable {
         if(shopRating >= 0 && shopRating <= 5) {
             this.shopRating = shopRating;
         } else {
-            throw new IllegalArgumentException("Shop Rating must be between 0 and 5");
+            throw new ValidationException("Shop Rating must be between 0 and 5");
         }
     }
 
@@ -36,7 +39,7 @@ public class Shop implements IShop, Serializable {
         if(shopName != null) {
             this.shopName = shopName;
         } else {
-            throw  new IllegalArgumentException("Shop Name cannot be null");
+            throw  new NullValueException("Shop Name cannot be null");
         }
     }
 
@@ -48,7 +51,7 @@ public class Shop implements IShop, Serializable {
         if(paymentDate != null) {
             this.paymentDate = paymentDate;
         } else {
-            throw  new IllegalArgumentException("Payment Date cannot be null");
+            throw  new NullValueException("Payment Date cannot be null");
         }
     }
 

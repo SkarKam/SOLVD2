@@ -1,5 +1,9 @@
 package models.persons.employees;
 
+import exception.BlankValueException;
+import exception.NegativeValueException;
+import exception.ValidationException;
+
 import java.util.Objects;
 
 //Add fields
@@ -27,7 +31,7 @@ public class SecurityWorker extends CenterEmployee {
         if(rate > this.rate) {
             this.rate = rate;
         } else {
-            throw new IllegalArgumentException("Rate must be greater than or equal to " + this.rate);
+            throw new ValidationException("Rate must be greater than or equal to " + this.rate);
         }
     }
 
@@ -39,7 +43,7 @@ public class SecurityWorker extends CenterEmployee {
         if(hoursWorked >= 0) {
             this.hoursWorked = hoursWorked;
         } else {
-            throw new IllegalArgumentException("Hours worked cannot be negative");
+            throw new NegativeValueException("Hours worked cannot be negative");
         }
     }
 
@@ -51,7 +55,7 @@ public class SecurityWorker extends CenterEmployee {
         if(!securityCompany.isBlank()) {
             SecurityWorker.securityCompany = securityCompany;
         } else {
-            throw new IllegalArgumentException("SecurityCompany cannot be blank");
+            throw new BlankValueException("SecurityCompany cannot be blank");
         }
     }
 

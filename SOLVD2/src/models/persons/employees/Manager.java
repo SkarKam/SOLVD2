@@ -1,5 +1,8 @@
 package models.persons.employees;
 
+import exception.NegativeValueException;
+import exception.ValidationException;
+
 import java.util.Objects;
 
 public class Manager extends CenterEmployee {
@@ -19,7 +22,7 @@ public class Manager extends CenterEmployee {
         if(salary >= 0) {
             this.salary = salary;
         } else {
-            throw new IllegalArgumentException("Salary cannot be negative");
+            throw new NegativeValueException("Salary cannot be negative");
         }
     }
 
@@ -31,7 +34,7 @@ public class Manager extends CenterEmployee {
         if(bonus >= 500 && bonus < 2000) {
             Manager.bonus = bonus;
         } else {
-            throw new IllegalArgumentException("Bonus must be between 500 and 2000");
+            throw new ValidationException("Bonus must be between 500 and 2000");
         }
     }
 
